@@ -1,4 +1,5 @@
 pipeline {
+  agent any
   environment {
       IONIC_TOKEN = credentials('ionic-token')
   }
