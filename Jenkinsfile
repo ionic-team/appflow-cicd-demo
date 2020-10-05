@@ -17,40 +17,42 @@ pipeline {
       }
     }
 
-    parallel {
-      stage('Android Build') {
-        agent {
-          docker {
-            image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
-            args '-v $PWD:/usr/src/app/ -u 0:0'
+    stage('Build') {
+      parallel {
+        stage('Build Android') {
+          agent {
+            docker {
+              image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
+              args '-v $PWD:/usr/src/app/ -u 0:0'
+            }
+          }
+          steps {
+              sh 'ionic package build android debug --environment="Jenkins" --native-config"=Jenkins"'
           }
         }
-        steps {
-            sh 'ionic package build android debug --environment="Jenkins" --native-config"=Jenkins"'
-        }
-      }
 
-      stage('iOS Build') {
-        agent {
-          docker {
-            image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
-            args '-v $PWD:/usr/src/app/ -u 0:0'
+        stage('Build iOS') {
+          agent {
+            docker {
+              image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
+              args '-v $PWD:/usr/src/app/ -u 0:0'
+            }
+          }
+          steps {
+              sh 'ionic package build ios ad-hoc --environment="Jenkins" --native-config"=Jenkins" --security-profile="Jenkins" --target-platform="macOS - 2020.09"'
           }
         }
-        steps {
-            sh 'ionic package build ios ad-hoc --environment="Jenkins" --native-config"=Jenkins" --security-profile="Jenkins" --target-platform="macOS - 2020.09"'
-        }
-      }
 
-      stage('Live Update Build') {
-        agent {
-          docker {
-            image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
-            args '-v $PWD:/usr/src/app/ -u 0:0'
+        stage('Build Live Update') {
+          agent {
+            docker {
+              image  'ghcr.io/ionic-team/ionic-cli:6.11.11'
+              args '-v $PWD:/usr/src/app/ -u 0:0'
+            }
           }
-        }
-        steps {
-            sh 'ionic deploy build --environment="Jenkins"'
+          steps {
+              sh 'ionic deploy build --environment="Jenkins"'
+          }
         }
       }
     }
