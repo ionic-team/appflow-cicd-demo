@@ -1,0 +1,38 @@
+image: ghcr.io/ionic-team/ionic-cli:6.11.11
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  script:
+    - npm ci
+    - npm run test
+
+test:
+  stage: test
+  script:
+    - npm ci
+    - npm run test
+
+build-ios:
+  stage: build
+  script:
+    - ionic package build ios ad-hoc --environment="GitLab" --native-config"=GitLab" --security-profile="GitLab" --target-platform="macOS - 2020.09"
+  only:
+    - /^master$/
+
+build-android:
+  stage: build
+  script:
+    - ionic package build android debug --environment="GitLab" --native-config"=GitLab"
+  only:
+    - /^master$/
+
+build-live-update:
+  stage: build
+  script:
+    - ionic deploy build --environment="Jenkins"
+  only:
+    - /^master$/
