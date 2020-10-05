@@ -12,8 +12,8 @@ const ExploreContainer: React.FC = () => {
       { ciTrigger && (
         <p>Triggered by {ciTrigger}
           <br/>
-            <img src={`assets/appflow.png`} height="100px" />
-            <img src={`assets/${ciTrigger.toLowerCase()}.png`} height="100px" />
+            <img src={`assets/appflow.png`} height="100px" alt="" />
+            <img src={`assets/${ciTrigger.toLowerCase()}.png`} height="100px" alt="" />
         </p>
       )}
     </div>
