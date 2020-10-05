@@ -27,7 +27,12 @@ pipeline {
             }
           }
           steps {
-              sh 'ionic package build android debug --environment="Jenkins" --native-config"=Jenkins"'
+              sh 'ionic package build android debug --environment="Jenkins" --native-config"=Jenkins" --build-file-name="GitLab-$BUILD_ID.apk"'
+          }
+          post {
+            success {
+              archiveArtifacts artifacts: 'GitLab-$BUILD_ID.apk', fingerprint: true
+            }
           }
         }
 
@@ -39,7 +44,12 @@ pipeline {
             }
           }
           steps {
-              sh 'ionic package build ios ad-hoc --environment="Jenkins" --native-config"=Jenkins" --security-profile="Jenkins" --target-platform="macOS - 2020.09"'
+              sh 'ionic package build ios ad-hoc --environment="Jenkins" --native-config"=Jenkins" --security-profile="Jenkins" --target-platform="macOS - 2020.09" --build-file-name="GitLab-$BUILD_ID.ipa"'
+          }
+          post {
+            success {
+              archiveArtifacts artifacts: 'GitLab-$BUILD_ID.ipa', fingerprint: true
+            }
           }
         }
 
