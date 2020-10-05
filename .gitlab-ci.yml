@@ -19,14 +19,20 @@ test:
 build-ios:
   stage: build
   script:
-    - ionic package build ios ad-hoc --environment="GitLab" --native-config"=GitLab" --security-profile="GitLab" --target-platform="macOS - 2020.09"
+    - ionic package build ios ad-hoc --environment="GitLab" --native-config"=GitLab" --security-profile="GitLab" --target-platform="macOS - 2020.09" --build-file-name="GitLab-$CI_PIPELINE_ID.ipa"
+  artifacts:
+    paths:
+      - GitLab-$CI_PIPELINE_ID.ipa
   only:
     - /^master$/
 
 build-android:
   stage: build
   script:
-    - ionic package build android debug --environment="GitLab" --native-config"=GitLab"
+    - ionic package build android debug --environment="GitLab" --native-config"=GitLab" --build-file-name="GitLab-$CI_PIPELINE_ID.apk"
+  artifacts:
+    paths:
+      - GitLab-$CI_PIPELINE_ID.apk
   only:
     - /^master$/
 
