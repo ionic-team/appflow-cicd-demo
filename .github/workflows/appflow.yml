@@ -5,6 +5,8 @@ name: AppflowCI
 on:
   push:
     branches: [ master ]
+env:
+  IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
