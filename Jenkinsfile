@@ -31,7 +31,7 @@ pipeline {
           }
           post {
             success {
-              archiveArtifacts artifacts: '**/*.apk', fingerprint: true
+              archiveArtifacts artifacts: '**/Jenkins.*.apk', fingerprint: true
             }
           }
         }
@@ -48,7 +48,7 @@ pipeline {
           }
           post {
             success {
-              archiveArtifacts artifacts: '**/*.ipa', fingerprint: true
+              archiveArtifacts artifacts: '**/Jenkins.*.ipa', fingerprint: true
             }
           }
         }
