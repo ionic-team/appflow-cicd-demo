@@ -27,4 +27,4 @@ jobs:
       - name: Install Ionic CLI
         run: npm i -g @ionic/cli@6.11.11
 
-      - run: ionic deploy build --environment="GitHub" --Channel="Production"
+      - run: ionic deploy build --environment="GitHub"
