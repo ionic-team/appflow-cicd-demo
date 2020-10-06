@@ -31,7 +31,7 @@ pipeline {
           }
           post {
             success {
-              archiveArtifacts artifacts: '**/*.ipa', fingerprint: true
+              archiveArtifacts artifacts: '**/*.apk', fingerprint: true
             }
           }
         }

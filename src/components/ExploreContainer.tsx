@@ -3,7 +3,7 @@ import { Capacitor } from '@capacitor/core';
 import './ExploreContainer.css';
 
 const ExploreContainer: React.FC = () => {
-  const ciTrigger = process.env.REACT_APP_CI_TRIGGER || 'GitLab';
+  const ciTrigger = process.env.REACT_APP_CI_TRIGGER || 'Ionic CLI';
   const platform = Capacitor.getPlatform();
   const binaryType = platform === 'ios' ? 'IPA' : platform === 'android' ? 'APK' : 'website'
   return (
