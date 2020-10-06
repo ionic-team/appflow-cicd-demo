@@ -42,7 +42,7 @@ jobs:
       - run: ionic package build ios ad-hoc --environment="GitHub" --native-config"=GitHub" --security-profile="GitHub" --target-platform="macOS - 2020.09" --build-file-name="GitHub-${{ github.run_id }}.ipa"
       - uses: actions/upload-artifact@v2
         with:
-          name: GitHub-${{ github.run_id }}.ipa
+          name: iOS.zip
           path: ${{ github.workspace }}/**/*.ipa
 
   build-android:
@@ -63,7 +63,7 @@ jobs:
       - run: ionic package build android debug --environment="GitHub" --native-config"=GitHub" --build-file-name="GitHub-${{ github.run_id }}.apk"
       - uses: actions/upload-artifact@v2
         with:
-          name: GitHub-${{ github.run_id }}.apk
+          name: Android.zip
           path: ${{ github.workspace }}/**/*.apk
 
   build-live-update:
