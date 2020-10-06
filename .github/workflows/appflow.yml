@@ -1,0 +1,82 @@
+name: AppflowCI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm test
+  
+  build-ios:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x
+    
+      - name: Install Ionic CLI
+        run: npm i -g @ionic/cli@6.11.11
+
+      - run: ionic package build ios ad-hoc --environment="GitHub" --native-config"=GitHub" --security-profile="GitHub" --target-platform="macOS - 2020.09" --build-file-name="GitHub-${{env.GITHUB_RUN_ID}}.ipa"
+      - uses: actions/upload-artifact@v2
+        with:	
+          name: GitHub-${{env.GITHUB_RUN_ID}}.ipa	
+          path: ${{ github.workspace }}/**/*.ipa
+
+  build-android:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x
+    
+      - name: Install Ionic CLI
+        run: npm i -g @ionic/cli@6.11.11
+
+      - run: ionic package build android debug --environment="GitHub" --native-config"=GitHub" --build-file-name="GitHub-${{env.GITHUB_RUN_ID}}.apk"
+      - uses: actions/upload-artifact@v2
+        with:	
+          name: GitHub-${{env.GITHUB_RUN_ID}}.apk	
+          path: ${{ github.workspace }}/**/*.apk
+
+  build-live-update:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x
+    
+      - name: Install Ionic CLI
+        run: npm i -g @ionic/cli@6.11.11
+
+      - run: ionic deploy build --environment="GitHub"
