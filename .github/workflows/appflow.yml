@@ -30,7 +30,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
       - name: Build iOS with Appflow
         uses: ionic-team/appflow-build@v1
         with:
@@ -51,7 +50,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
       - name: Build Android with Appflow
         uses: ionic-team/appflow-build@v1
         with:
@@ -70,7 +68,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
       - name: Build Live Update with Appflow
         uses: ionic-team/appflow-build@v1
         with:
