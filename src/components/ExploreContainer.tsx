@@ -1,14 +1,11 @@
 import React from 'react';
-import { Capacitor } from '@capacitor/core';
 import './ExploreContainer.css';
 
 const ExploreContainer: React.FC = () => {
   const ciTrigger = process.env.REACT_APP_CI_TRIGGER || 'Ionic CLI';
-  const platform = Capacitor.getPlatform();
-  const binaryType = platform === 'ios' ? 'IPA' : platform === 'android' ? 'APK' : 'website'
   return (
     <div className="container">
-      <strong>This {binaryType} was built by Appflow</strong>
+      <strong>This Live Update was 🚀 by Appflow</strong>
       { ciTrigger && (
         <p>Triggered by {ciTrigger}
           <br/>
