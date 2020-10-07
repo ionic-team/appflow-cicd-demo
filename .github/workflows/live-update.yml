@@ -19,12 +19,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+      - name: Build Live Update with Appflow
+        uses: ionic-team/appflow-build@v0.0.1
         with:
-          node-version: 12.x
-
-      - name: Install Ionic CLI
-        run: npm i -g @ionic/cli@6.11.11
-
-      - run: ionic deploy build --environment="GitHub"
+          token: ${{ secrets.IONIC_TOKEN }}
+          app-id: c46af4ba
+          platform: Web
+          environment: GitHub

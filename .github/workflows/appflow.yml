@@ -31,19 +31,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+      - name: Build iOS with Appflow
+        uses: ionic-team/appflow-build@v0.0.1
         with:
-          node-version: 12.x
-
-      - name: Install Ionic CLI
-        run: npm i -g @ionic/cli@6.11.11
-
-      - run: ionic package build ios ad-hoc --environment="GitHub" --native-config"=GitHub" --security-profile="GitHub" --target-platform="macOS - 2020.09" --build-file-name="GitHub-${{ github.run_id }}.ipa"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: iOS.zip
-          path: ${{ github.workspace }}/**/*.ipa
+          token: ${{ secrets.IONIC_TOKEN }}
+          app-id: c46af4ba
+          platform: iOS
+          build-type: ad-hoc
+          environment: GitHub
+          native-config: GitHub
+          certificate: GitHub
+          build-stack: macOS - 2020.09
+          upload-artifact: iOS.zip
 
   build-android:
     # The type of runner that the job will run on
@@ -52,19 +51,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+      - name: Build Android with Appflow
+        uses: ionic-team/appflow-build@v0.0.1
         with:
-          node-version: 12.x
-
-      - name: Install Ionic CLI
-        run: npm i -g @ionic/cli@6.11.11
-
-      - run: ionic package build android debug --environment="GitHub" --native-config"=GitHub" --build-file-name="GitHub-${{ github.run_id }}.apk"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Android.zip
-          path: ${{ github.workspace }}/**/*.apk
+          token: ${{ secrets.IONIC_TOKEN }}
+          app-id: c46af4ba
+          platform: Android
+          build-type: debug
+          environment: GitHub
+          native-config: GitHub
+          upload-artifact: Android.zip
 
   build-live-update:
     # The type of runner that the job will run on
@@ -73,12 +69,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+      - name: Build Live Update with Appflow
+        uses: ionic-team/appflow-build@v0.0.1
         with:
-          node-version: 12.x
-
-      - name: Install Ionic CLI
-        run: npm i -g @ionic/cli@6.11.11
-
-      - run: ionic deploy build --environment="GitHub"
+          token: ${{ secrets.IONIC_TOKEN }}
+          app-id: c46af4ba
+          platform: Web
+          environment: GitHub
