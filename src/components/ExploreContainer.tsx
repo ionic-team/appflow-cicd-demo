@@ -5,7 +5,7 @@ const ExploreContainer: React.FC = () => {
   const ciTrigger = process.env.REACT_APP_CI_TRIGGER || 'Ionic CLI';
   return (
     <div className="container">
-      <strong>This Live Update was 🚀 by Appflow</strong>
+      <strong>This Live Update was built by Appflow</strong>
       { ciTrigger && (
         <p>Triggered by {ciTrigger}
           <br/>
