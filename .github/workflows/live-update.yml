@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Live Update with Appflow
-        uses: ionic-team/appflow-build@v0.0.1
+        uses: ionic-team/appflow-build@v0.0.3
         with:
           token: ${{ secrets.IONIC_TOKEN }}
           app-id: c46af4ba
