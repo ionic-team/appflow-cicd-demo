@@ -42,7 +42,8 @@ jobs:
           native-config: GitHub
           certificate: GitHub
           build-stack: macOS - 2020.09
-          upload-artifact: iOS.zip
+          filename: GitHub-${{ github.workflow }}.ipa
+          upload-artifact: iOS
 
   build-android:
     # The type of runner that the job will run on
@@ -60,7 +61,8 @@ jobs:
           build-type: debug
           environment: GitHub
           native-config: GitHub
-          upload-artifact: Android.zip
+          filename: GitHub-${{ github.workflow }}.apk
+          upload-artifact: Android
 
   build-live-update:
     # The type of runner that the job will run on
